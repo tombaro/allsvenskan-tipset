@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div class="row">
+      <div class="col-md-3">
+      	<ol class="list-group">
+          <% var i = 1 %>
+      		<% score.forEach(function(position) { %>
+      			<li class="list-group-item"><%= i %>. <%= position.name %> - <%= position.points %> poäng</li>
+      		<%	i++}); %>
+      	</ol>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <button type="button" id="result" class="btn btn-primary">Uppdatera resultat</button>
+      </div>
+      <div class="col-md-2">
+        <a href="#" id="save-round">Spara som omgång</a>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $('button').click(function() {
+        $.post('/scrape');
+      });
+      $('#save-round').click(function() {
+        $.post('/scrape-round');
+      });
+    </script>
+  </body>
+</html>
