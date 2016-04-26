@@ -11,12 +11,27 @@
     <p>Welcome to <%= title %></p>
     <div class="row">
       <div class="col-md-3">
+        <h2>Ställning</h2>
       	<ol class="list-group">
           <% var i = 1 %>
       		<% score.forEach(function(position) { %>
       			<li class="list-group-item"><%= i %>. <%= position.name %> - <%= position.points %> poäng</li>
       		<%	i++}); %>
       	</ol>
+      </div>
+      <div class="col-md-9">
+        <% for(var j=0; j<tips.tips.length; j++ ) { %>
+          <div class="col-md-4">
+            <h2><%= tips.tips[j].name %></h2>
+            <ul class="list-group">
+              <% tips.tips[j].item.forEach(function(data) { %>
+              <li class="list-group-item">
+                <%= data.position %>. <%= data.team %>
+              </li>
+              <% })  %>
+            </ul>
+          </div>
+        <% } %>
       </div>
     </div>
     <div class="row">
