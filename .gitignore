@@ -38,5 +38,6 @@ jspm_packages
 
 # Generated pages
 *.txt
-shared/tips/*.json
 shared/results/*.json
+
+*.DS_Store
