@@ -19,19 +19,38 @@
       		<%	i++}); %>
       	</ol>
       </div>
-      <div class="col-md-9">
-        <% for(var j=0; j<tips.tips.length; j++ ) { %>
+      <div class="col-md-7">
+        <% for(var j=0; j<tips.length; j++ ) { %>
           <div class="col-md-4">
-            <h2><%= tips.tips[j].name %></h2>
+            <h2><%= tips[j].name %></h2>
             <ul class="list-group">
-              <% tips.tips[j].item.forEach(function(data) { %>
-              <li class="list-group-item">
-                <%= data.position %>. <%= data.team %>
+              <% var l = 0; %>
+              <% tips[j].teampoints.forEach(function(data) { %>
+              <% l++ %>
+              <li class="list-group-item" 
+                <% if (data.points === 16) { %> style="background-color:#33cc33" <% } 
+                    else if (data.points > 13 ) { %> style="background-color:#ccff66" <% }
+                    else if (data.points < 10 ) { %> style="background-color:#ff5050" <% }
+                %>
+              >
+                <%= l %>. <%= data.name %> poäng:<%= data.points %>
               </li>
               <% })  %>
             </ul>
           </div>
         <% } %>
+      </div>
+      <div class="col-md-2">
+        <h2>Sluttabell</h2>
+        <ul class="list-group">
+        <% var k = 1; %>
+        <% table.result.item.forEach(function(tbl) { %>
+          <li class="list-group-item">
+            <%= k %>. <%= tbl.team %>
+          </li>
+          <% k++ %>
+        <% }) %>
+        </ul>
       </div>
     </div>
     <div class="row">
