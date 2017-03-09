@@ -33,10 +33,6 @@ app.use('/scrape-round', scrape);
 
 app.post('/scrape', function(req, res, next) {
   scrapesvt();
-  res.sendStatus(200);
-});
-
-app.post('/scrape-round', function(req, res, next) {
   scraperound();
   res.sendStatus(200);
 });

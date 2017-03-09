@@ -22,10 +22,11 @@ var scrape = function(req, res, next) {
 		};
 		// Write to json
 		var to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
+		return to_string;
 
-		fs.writeFile('./shared/results/result-latest-svt.json', to_string, function(err) {
-			console.log('Svt has been scraped and saved ;)');
-		});
+		// fs.writeFile('./shared/results/result-latest-svt.json', to_string, function(err) {
+		// 	console.log('Svt has been scraped and saved ;)');
+		// });
 	});
 };
 
