@@ -13,7 +13,8 @@ var scrape = function(req, res, next) {
 			var current = obj.rows[i];
 			var tmp = {
 				position: current.substring(0,2).trim(),
-				team: current.substring(3,16).trim()
+				team: current.substring(3,16).trim(),
+				round: current.substring(17,19).trim()
 			};
 			
 			//console.log(team);

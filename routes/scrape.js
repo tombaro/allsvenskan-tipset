@@ -16,7 +16,8 @@ router.get('/', function(req, res, next) {
 			var current = obj.rows[i];
 			var tmp = {
 				position: current.substring(0,2).trim(),
-				team: current.substring(3,16).trim()
+				team: current.substring(3,16).trim(),
+				round: current.substring(16,2).trim()
 			};
 			
 			//console.log(team);
@@ -24,6 +25,7 @@ router.get('/', function(req, res, next) {
 		};
 		// Write to json
 		var to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
+		// TODO: Skriv en fil för varje omgång, om den är komplett.
 
 		fs.writeFile('./shared/results/result-latest-svt.json', to_string, function(err) {
 			console.log('rly');
