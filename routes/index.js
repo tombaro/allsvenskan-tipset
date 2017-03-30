@@ -9,7 +9,7 @@ var tips = require('../shared/tips/teamscore.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { 
-  	title: 'Tippning Allsvenskan 2016',
+  	title: 'Tippning Allsvenskan 2017',
 	score: score.score(),
 	tips: tips.teamscore(),
 	table: table
