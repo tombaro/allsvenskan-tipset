@@ -7,19 +7,19 @@ var scrape = function(req, res, next) {
 	const latest_table = scrape_table();
 
 	// Write latest result
-	const latest = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
-	fs.writeFile('./shared/results/result-latest.json', latest, function(err) {
-		console.log('Result has been scraped and saved ;)');
-	});
+	// const latest = '{ "result": { "round": "latest", "item":' + JSON.stringify(latest_table) + '}}';
+	// fs.writeFile('./shared/results/result-latest.json', latest, function(err) {
+	// 	console.log('Result has been scraped and saved ;)');
+	// });
 
-	if (is_complete_round(result.item)) {
-		// Write latest round
-		const round_number = 0;
-		const round = '{ "result": { "round": "' + round_number + '", "item":' + JSON.stringify(items) + '}}';
-		fs.writeFile('./shared/results/result-round-' + round_number + '.json', round, function(err) {
-			console.log('Round has been scraped and saved ;)');
-		});
-	}
+	// if (is_complete_round(latest.item)) {
+	// 	// Write latest round
+	// 	const round_number = 0;
+	// 	const round = '{ "result": { "round": "' + round_number + '", "item":' + JSON.stringify(items) + '}}';
+	// 	fs.writeFile('./shared/results/result-round-' + round_number + '.json', round, function(err) {
+	// 		console.log('Round has been scraped and saved ;)');
+	// 	});
+	// }
 }
 
 function scrape_table() {
@@ -28,6 +28,7 @@ function scrape_table() {
 		rows: ['span']
 	})(function(err, obj){
 		var items = [];
+		
 		for (var i = 4; i < obj.rows.length -3; i++) {
 			var current = obj.rows[i];
 			var tmp = {
@@ -35,12 +36,13 @@ function scrape_table() {
 				team: current.substring(3,16).trim(),
 				round: current.substring(17,19).trim()
 			};
-			
-			//console.log(team);
 			items.push(tmp);
 		};
 
-		return items;
+		const latest = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
+		fs.writeFile('./shared/results/result-latest.json', latest, function(err) {
+			console.log('Result has been scraped and saved ;)');
+		});
 
 	});
 };

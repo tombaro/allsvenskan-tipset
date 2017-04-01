@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var scrapesvt = require('./shared/results/scrape-svt.js');
 var scraperound = require('./shared/results/scrape-round.js');
+var scraperesult = require('./shared/results/scrape-results.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -32,8 +33,7 @@ app.use('/scrape', scrape);
 app.use('/scrape-round', scrape);
 
 app.post('/scrape', function(req, res, next) {
-  scrapesvt();
-  scraperound();
+  scraperesult();
   res.sendStatus(200);
 });
 

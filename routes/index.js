@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var score = require('../shared/tips/score.js');
-var table = require('../shared/results/result-latest-svt.json');
+var table = require('../shared/results/result-latest.json');
 var tips = require('../shared/tips/teamscore.js');
 
 
