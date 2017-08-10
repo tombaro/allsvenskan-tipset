@@ -39,6 +39,6 @@ jspm_packages
 # Generated pages
 *.txt
 shared/results/*.json
-!shared/results/result-latest.json
+shared/results/result-latest.json
 
 *.DS_Store
