@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
 		var to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
 		// TODO: Skriv en fil för varje omgång, om den är komplett.
 
-		fs.writeFile('./shared/results/result-latest-svt.json', to_string, function(err) {
+		fs.writeFile('./shared/results/result-latest.json', to_string, function(err) {
 			console.log('rly');
 		});
 	});
