@@ -13,7 +13,11 @@ var routes = require('./api/routes/standingsRoute');
 routes(app);
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', routes);
+
+// Serve index page
+app.get('/',function(req,res){
+    res.sendFile(path.join(__dirname + './public/index.html'));
+});
 
 app.listen(port);
 
