@@ -1,0 +1,24 @@
+{
+  "name": "allsvenskan-api",
+  "version": "0.0.1",
+  "description": "Provide apis for allsvenskan",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/tombaro/allsvenskan-api.git"
+    },
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: No test implemented.\" && exit 1"
+  },
+  "author": "tombaro",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "x-ray": "^2.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
