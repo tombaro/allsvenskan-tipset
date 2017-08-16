@@ -1,10 +1,9 @@
 // Beräkna poäng per lag, baserat på tips och senaste result
 var tips = require('./tips-shortname.json');
-var table = require('../results/result-latest.json');
 
 const MAX_POINTS = 16;
 
-function get_team_points(tips) {
+function get_team_points(tips, table) {
 	var count = tips.length;
 
 	var teampoints = [];
@@ -23,21 +22,18 @@ function get_team_points(tips) {
 }
 
 module.exports = {
-	teamscore: function() {
+	teamscore: function(standings) {
+		const table = standings;
 		var team = [];
 
 		for (var i = 0; i < tips.tips.length; i++) {
 			var tmp = {
 				position: i,
 				name: tips.tips[i].name,
-				teampoints: get_team_points(tips.tips[i].item)
+				teampoints: get_team_points(tips.tips[i].item, table)
 			};
 			team.push(tmp);
 		};
-
-		// return points.sort(function(a, b) {
-		// 	return b.points - a.points;
-		// });
 		
 		return team;
 	}
