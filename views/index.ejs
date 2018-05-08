@@ -46,7 +46,7 @@
         <% var k = 1; %>
         <% table.result.item.forEach(function(tbl) { %>
           <li class="list-group-item">
-            <%= k %>. <%= tbl.team %>
+            <%= k %>. <%= tbl.team %> <div style="float: right;"><%= tbl.points %></div>
           </li>
           <% k++ %>
         <% }) %>
