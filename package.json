@@ -5,10 +5,10 @@
   "engines": {
     "node": "6.9.1"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/tombaro/allsvenskan-api.git"
-    },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tombaro/allsvenskan-api.git"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node server.js",

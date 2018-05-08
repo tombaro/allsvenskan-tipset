@@ -20,7 +20,8 @@ exports.list_standings = function(req, res) {
                 var tmp = {
                     position: current.substring(0,2).trim(),
                     team: current.substring(3,16).trim(),
-                    round: current.substring(16,2).trim()
+                    round: current.substring(16,2).trim(),
+                    points: current.substring(36,39).trim()
                 };
                 
                 items.push(tmp);
