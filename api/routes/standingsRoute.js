@@ -4,6 +4,8 @@ module.exports = function(app) {
 
 
   // standings Routes
-  app.route('/current')
-    .get(standings.list_standings)
+  app.route('/as')
+    .get(standings.allsvenskan_standings)
+  app.route('/el')
+    .get(standings.elitettan_standings)
 };
