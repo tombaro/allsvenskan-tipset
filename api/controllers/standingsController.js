@@ -17,11 +17,17 @@ exports.allsvenskan_standings = function(req, res) {
             var items = [];
             for (var i = 4; i < obj.rows.length -3; i++) {
                 var current = obj.rows[i];
+                //At this point 'current' looks like this "PPTTTTTTTTTTTTTTTRR_WW_DD_LL__GS_GC__PP"
                 var tmp = {
                     position: current.substring(0,2).trim(),
-                    team: current.substring(3,16).trim(),
+                    team: current.substring(2,17).trim(),
                     round: current.substring(17,19).trim(),
-                    points: current.substring(36,39).trim()
+                    win: current.substring(20,22).trim(),
+                    draw: current.substring(23,25).trim(),
+                    loss: current.substring(26,28).trim(),
+                    gs: current.substring(30,32).trim(),
+                    gc: current.substring(33,35).trim(),
+                    points: current.substring(37,39).trim()
                 };
                 items.push(tmp);
             };
@@ -35,30 +41,66 @@ exports.allsvenskan_standings = function(req, res) {
 
 exports.elitettan_standings = function(req, res) {
 /* Scrape the table. */
-	x('http://www.elitettan.se/tabell/', '#tabell',
+	x('https://www.svt.se/svttext/web/pages/350.html', '.root',
 	{
-		rows: ['tr']
+		rowsG: ['.G'],
+		rowsW: ['.W'],
+		rowsC: ['.C']
 	})(function(err, obj){
         if (err) {
             res.send(err);
         } else {    
-            //console.log(obj.rows.toString().replace(/(\n|\t)/g,"   ").replace(/,/g, '\n'));
             var items = [];
-            for (var i = 1; i < obj.rows.length ; i++) {
-                var current = obj.rows[i];
-                //console.log(current.replace(/\n/g," "));
+            for (var i = 0; i < 2; i++) {
+                var current = obj.rowsG[i];;
+                console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
                 var tmp = {
-                    position: current.substring(0,4).trim().replace('.',""),
-                    team: current.substring(8,30).trim().replace(/(\n|\t|[0-9]|-)/g ,""),
-                    round: current.substring(8,30).trim().match(/\d+.?\d*/),
-                    points: current.substring((current.length -4), current.length).trim()
+                    position: current.substring(0,2).trim(),
+                    team: current.substring(2,17).trim(),
+                    round: current.substring(17,19).trim(),
+                    win: current.substring(20,22).trim(),
+                    draw: current.substring(23,25).trim(),
+                    loss: current.substring(26,28).trim(),
+                    gs: current.substring(30,32).trim(),
+                    gc: current.substring(33,35).trim(),
+                    points: current.substring(37,39).trim()
                 };
-                //Removes linebreaks elitettan.se uses
-                if(!(tmp.round === null)){
                     items.push(tmp)
-                    
-                }
             };
+            for (var i = 1; i < 10; i++) {
+                var current = obj.rowsW[i];;
+                console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
+                var tmp = {
+                    position: current.substring(0,2).trim(),
+                    team: current.substring(2,17).trim(),
+                    round: current.substring(17,19).trim(),
+                    win: current.substring(20,22).trim(),
+                    draw: current.substring(23,25).trim(),
+                    loss: current.substring(26,28).trim(),
+                    gs: current.substring(30,32).trim(),
+                    gc: current.substring(33,35).trim(),
+                    points: current.substring(37,39).trim()
+                };
+                    items.push(tmp)
+            };
+            //Since class '.C' is used alot in the beginning and french standings are following, we are fetching bottom 3 backwards.
+            for (var i = obj.rowsC.length-5; i < obj.rowsC.length -2; i++) {
+                var current = obj.rowsC[i];;
+                console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
+                var tmp = {
+                    position: current.substring(0,2).trim(),
+                    team: current.substring(2,17).trim(),
+                    round: current.substring(17,19).trim(),
+                    win: current.substring(20,22).trim(),
+                    draw: current.substring(23,25).trim(),
+                    loss: current.substring(26,28).trim(),
+                    gs: current.substring(30,32).trim(),
+                    gc: current.substring(33,35).trim(),
+                    points: current.substring(37,39).trim()
+                };
+                    items.push(tmp)
+            };
+            
             var str = items.slice(0,16);
             // Write to json
             const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(str) + '}}';
@@ -70,33 +112,32 @@ exports.elitettan_standings = function(req, res) {
 
 exports.damallsvenskan_standings = function(req, res) {
 /* Scrape the table. */
-	x('http://www.damallsvenskan.se/tabell/', '#tab-1',
+	x('http://www.svt.se/svttext/web/pages/349.html',  '.sub',
 	{
-		rows: ['tr']
+		rows: ['span']
 	})(function(err, obj){
         if (err) {
             res.send(err);
-        } else {    
-            //console.log(obj.rows.toString().replace(/(\n|\t)/g,"   ").replace(/,/g, '\n'));
+        } else {      
             var items = [];
-            for (var i = 1; i < obj.rows.length ; i++) {
+            for (var i = 4; i < obj.rows.length -3; i++) {
                 var current = obj.rows[i];
-                //console.log(current.replace(/\n/g," "));
+                //At this point 'current' looks like this "PPTTTTTTTTTTTTTTTRR_WW_DD_LL__GS_GC__PP"
                 var tmp = {
-                    position: current.substring(0,4).trim().replace('.',""),
-                    team: current.substring(8,30).trim().replace(/(\n|\t|[0-9]|-)/g ,""),
-                    round: current.substring(8,30).trim().match(/\d+.?\d*/),
-                    points: current.substring((current.length -4), current.length).trim()
+                    position: current.substring(0,2).trim(),
+                    team: current.substring(2,17).trim(),
+                    round: current.substring(17,19).trim(),
+                    win: current.substring(20,22).trim(),
+                    draw: current.substring(23,25).trim(),
+                    loss: current.substring(26,28).trim(),
+                    gs: current.substring(30,32).trim(),
+                    gc: current.substring(33,35).trim(),
+                    points: current.substring(37,39).trim()
                 };
-                //Removes linebreaks elitettan.se uses
-                if(!(tmp.round === null)){
-                    items.push(tmp)
-                    
-                }
+                items.push(tmp);
             };
-            var str = items.slice(0,16);
             // Write to json
-            const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(str) + '}}';
+            const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
             res.send(to_string);
             
         }
@@ -105,33 +146,32 @@ exports.damallsvenskan_standings = function(req, res) {
 
 exports.superettan_standings = function(req, res) {
 /* Scrape the table. */
-	x('https://www.superettan.se/tabell', '.table-total',
+	x('http://www.svt.se/svttext/web/pages/345.html',  '.sub',
 	{
-		rows: ['tr']
+		rows: ['span']
 	})(function(err, obj){
         if (err) {
             res.send(err);
-        } else {    
-            //console.log(obj.rows.toString().replace(/(\n|\t)/g,"   ").replace(/,/g, '\n'));
+        } else {      
             var items = [];
-            for (var i = 1; i < obj.rows.length ; i++) {
+            for (var i = 4; i < obj.rows.length -3; i++) {
                 var current = obj.rows[i];
-                //console.log(current.replace(/\n/g," "));
+                //At this point 'current' looks like this "PPTTTTTTTTTTTTTTTRR_WW_DD_LL__GS_GC__PP"
                 var tmp = {
-                    position: current.substring(0,4).trim().replace('.',""),
-                    team: current.substring(8,30).trim().replace(/(\n|\t|[0-9]|-)/g ,""),
-                    round: current.substring(8,30).trim().match(/\d+.?\d*/),
-                    points: current.substring((current.length -4), current.length).trim()
+                    position: current.substring(0,2).trim(),
+                    team: current.substring(2,17).trim(),
+                    round: current.substring(17,19).trim(),
+                    win: current.substring(20,22).trim(),
+                    draw: current.substring(23,25).trim(),
+                    loss: current.substring(26,28).trim(),
+                    gs: current.substring(30,32).trim(),
+                    gc: current.substring(33,35).trim(),
+                    points: current.substring(37,39).trim()
                 };
-                //Removes linebreaks elitettan.se uses
-                if(!(tmp.round === null)){
-                    items.push(tmp)
-                    
-                }
+                items.push(tmp);
             };
-            var str = items.slice(0,16);
             // Write to json
-            const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(str) + '}}';
+            const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
             res.send(to_string);
             
         }
