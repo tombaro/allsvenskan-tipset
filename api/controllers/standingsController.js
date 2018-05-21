@@ -41,7 +41,7 @@ exports.allsvenskan_standings = function(req, res) {
 
 exports.elitettan_standings = function(req, res) {
 /* Scrape the table. */
-	x('https://www.svt.se/svttext/web/pages/350.html', '.root',
+	x('https://www.svt.se/svttext/web/pages/350.html', '.root', 
 	{
 		rowsG: ['.G'],
 		rowsW: ['.W'],
@@ -53,7 +53,7 @@ exports.elitettan_standings = function(req, res) {
             var items = [];
             for (var i = 0; i < 2; i++) {
                 var current = obj.rowsG[i];;
-                console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
+                //console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
                 var tmp = {
                     position: current.substring(0,2).trim(),
                     team: current.substring(2,17).trim(),
@@ -69,7 +69,7 @@ exports.elitettan_standings = function(req, res) {
             };
             for (var i = 1; i < 10; i++) {
                 var current = obj.rowsW[i];;
-                console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
+                //console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
                 var tmp = {
                     position: current.substring(0,2).trim(),
                     team: current.substring(2,17).trim(),
@@ -84,9 +84,9 @@ exports.elitettan_standings = function(req, res) {
                     items.push(tmp)
             };
             //Since class '.C' is used alot in the beginning and french standings are following, we are fetching bottom 3 backwards.
-            for (var i = obj.rowsC.length-5; i < obj.rowsC.length -2; i++) {
+            for (var i = 0; i < obj.rowsC.length -1; i++) {
                 var current = obj.rowsC[i];;
-                console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
+                //console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
                 var tmp = {
                     position: current.substring(0,2).trim(),
                     team: current.substring(2,17).trim(),
@@ -98,7 +98,9 @@ exports.elitettan_standings = function(req, res) {
                     gc: current.substring(33,35).trim(),
                     points: current.substring(37,39).trim()
                 };
-                    items.push(tmp)
+                if(tmp.position == 12 || tmp.position == 13 || tmp.position == 14){
+                    items.push(tmp);
+                    }
             };
             
             var str = items.slice(0,16);
