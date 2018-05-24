@@ -25,10 +25,11 @@ exports.allsvenskan_standings = function(req, res) {
                     win: current.substring(20,22).trim(),
                     draw: current.substring(23,25).trim(),
                     loss: current.substring(26,28).trim(),
-                    gs: current.substring(30,32).trim(),
-                    gc: current.substring(33,35).trim(),
+                    gm: current.substring(30,32).trim(),
+                    im: current.substring(33,35).trim(),
                     points: current.substring(37,39).trim()
                 };
+                tmp.ms = (tmp.gm - tmp.im);
                 items.push(tmp);
             };
             // Write to json
@@ -61,13 +62,14 @@ exports.elitettan_standings = function(req, res) {
                     win: current.substring(20,22).trim(),
                     draw: current.substring(23,25).trim(),
                     loss: current.substring(26,28).trim(),
-                    gs: current.substring(30,32).trim(),
-                    gc: current.substring(33,35).trim(),
+                    gm: current.substring(30,32).trim(),
+                    im: current.substring(33,35).trim(),
                     points: current.substring(37,39).trim()
                 };
+                    tmp.ms = (tmp.gm - tmp.im);
                     items.push(tmp)
             };
-            for (var i = 1; i < 10; i++) {
+            for (var i = 0; i < 22; i++) {
                 var current = obj.rowsW[i];;
                 //console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
                 var tmp = {
@@ -77,11 +79,14 @@ exports.elitettan_standings = function(req, res) {
                     win: current.substring(20,22).trim(),
                     draw: current.substring(23,25).trim(),
                     loss: current.substring(26,28).trim(),
-                    gs: current.substring(30,32).trim(),
-                    gc: current.substring(33,35).trim(),
+                    gm: current.substring(30,32).trim(),
+                    im: current.substring(33,35).trim(),
                     points: current.substring(37,39).trim()
                 };
+                if(tmp.position >= 3 && tmp.position <= 11){
+                    tmp.ms = (tmp.gm - tmp.im);
                     items.push(tmp)
+                }
             };
             //Since class '.C' is used alot in the beginning and french standings are following, we are fetching bottom 3 backwards.
             for (var i = 0; i < obj.rowsC.length -1; i++) {
@@ -94,11 +99,12 @@ exports.elitettan_standings = function(req, res) {
                     win: current.substring(20,22).trim(),
                     draw: current.substring(23,25).trim(),
                     loss: current.substring(26,28).trim(),
-                    gs: current.substring(30,32).trim(),
-                    gc: current.substring(33,35).trim(),
+                    gm: current.substring(30,32).trim(),
+                    im: current.substring(33,35).trim(),
                     points: current.substring(37,39).trim()
                 };
                 if(tmp.position == 12 || tmp.position == 13 || tmp.position == 14){
+                    tmp.ms = (tmp.gm - tmp.im);
                     items.push(tmp);
                     }
             };
@@ -132,10 +138,11 @@ exports.damallsvenskan_standings = function(req, res) {
                     win: current.substring(20,22).trim(),
                     draw: current.substring(23,25).trim(),
                     loss: current.substring(26,28).trim(),
-                    gs: current.substring(30,32).trim(),
-                    gc: current.substring(33,35).trim(),
+                    gm: current.substring(30,32).trim(),
+                    im: current.substring(33,35).trim(),
                     points: current.substring(37,39).trim()
                 };
+                tmp.ms = (tmp.gm - tmp.im);
                 items.push(tmp);
             };
             // Write to json
@@ -166,10 +173,11 @@ exports.superettan_standings = function(req, res) {
                     win: current.substring(20,22).trim(),
                     draw: current.substring(23,25).trim(),
                     loss: current.substring(26,28).trim(),
-                    gs: current.substring(30,32).trim(),
-                    gc: current.substring(33,35).trim(),
+                    gm: current.substring(30,32).trim(),
+                    im: current.substring(33,35).trim(),
                     points: current.substring(37,39).trim()
                 };
+                tmp.ms = (tmp.gm - tmp.im);
                 items.push(tmp);
             };
             // Write to json
