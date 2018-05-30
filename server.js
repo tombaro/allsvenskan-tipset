@@ -6,6 +6,8 @@ path = require('path'),
 ejs = require('ejs'),
 axios = require('axios');
 
+//Domain where API is hosted:
+var domain = 'http://tobeodev.ddns.net:3000';
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -29,16 +31,16 @@ var elData = {};
 var dasData = {};
 var seData = {};
 
-axios.get('http://tobeodev.ddns.net:3000/as')
+axios.get(domain + '/as')
     .then(function(res){asData = res.data;})
     
-axios.get('http://tobeodev.ddns.net:3000/el')
+axios.get(domain + '/el')
     .then(function(res){elData = res.data;})
     
-axios.get('http://tobeodev.ddns.net:3000/das')
+axios.get(domain + '/das')
     .then(function(res){dasData = res.data;})
     
-axios.get('http://tobeodev.ddns.net:3000/se')
+axios.get(domain + '/se')
     .then(function(res){seData = res.data;})
 
 
@@ -56,6 +58,10 @@ app.get('/damallsvenskan', function(req,res){
 
 app.get('/superettan', function(req,res){
     res.render('tabell', {data: seData})
+})
+
+app.get('/allsvenskanbw', function(req,res){
+    res.render('bw', {data: asData})
 })
 
 app.listen(port);

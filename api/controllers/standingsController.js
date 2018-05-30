@@ -44,6 +44,7 @@ exports.elitettan_standings = function(req, res) {
 /* Scrape the table. */
 	x('https://www.svt.se/svttext/web/pages/350.html', '.root', 
 	{
+	   //Fetching classes because Elitettan has "current games" in the start wich varies in classes depending if on-going and also varies depending on amount of matches upcoming.
 		rowsG: ['.G'],
 		rowsW: ['.W'],
 		rowsC: ['.C']
@@ -88,9 +89,11 @@ exports.elitettan_standings = function(req, res) {
                     items.push(tmp)
                 }
             };
-            //Since class '.C' is used alot in the beginning and french standings are following, we are fetching bottom 3 backwards.
+            //Since class '.C' is used alot in the beginning and french standings are following, we fetching total amount of teams in the league
+            //and specifying places 12-14 so it won't grab games/top from French league
             for (var i = 0; i < obj.rowsC.length -1; i++) {
                 var current = obj.rowsC[i];;
+                //Used for testing outcome
                 //console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
                 var tmp = {
                     position: current.substring(0,2).trim(),
