@@ -35,7 +35,6 @@ exports.allsvenskan_standings = function(req, res) {
             // Write to json
             const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
             res.send(to_string);
-            
         }
 	});
 };
@@ -54,7 +53,7 @@ exports.elitettan_standings = function(req, res) {
         } else {    
             var items = [];
             for (var i = 0; i < 2; i++) {
-                var current = obj.rowsG[i];;
+                var current = obj.rowsG[i];
                 //console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
                 var tmp = {
                     position: current.substring(0,2).trim(),
@@ -70,8 +69,8 @@ exports.elitettan_standings = function(req, res) {
                     tmp.ms = (tmp.gm - tmp.im);
                     items.push(tmp)
             };
-            for (var i = 0; i < 22; i++) {
-                var current = obj.rowsW[i];;
+            for (var i = 0; i < obj.rowsW.length; i++) {
+                var current = obj.rowsW[i];
                 //console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
                 var tmp = {
                     position: current.substring(0,2).trim(),
@@ -91,9 +90,8 @@ exports.elitettan_standings = function(req, res) {
             };
             //Since class '.C' is used alot in the beginning and french standings are following, we fetching total amount of teams in the league
             //and specifying places 12-14 so it won't grab games/top from French league
-            for (var i = 0; i < obj.rowsC.length -1; i++) {
-                var current = obj.rowsC[i];;
-                //Used for testing outcome
+            for (var i = 0; i < obj.rowsC.length; i++) {
+                var current = obj.rowsC[i];
                 //console.log(current.replace(/\n/g," ").replace(/^\s|\s&|\t/g," "));
                 var tmp = {
                     position: current.substring(0,2).trim(),
@@ -111,12 +109,10 @@ exports.elitettan_standings = function(req, res) {
                     items.push(tmp);
                     }
             };
-            
             var str = items.slice(0,16);
             // Write to json
-            const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(str) + '}}';
+            const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
             res.send(to_string);
-            
         }
 	});
 };
@@ -151,7 +147,6 @@ exports.damallsvenskan_standings = function(req, res) {
             // Write to json
             const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
             res.send(to_string);
-            
         }
 	});
 };
@@ -186,7 +181,6 @@ exports.superettan_standings = function(req, res) {
             // Write to json
             const to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
             res.send(to_string);
-            
         }
 	});
 };
