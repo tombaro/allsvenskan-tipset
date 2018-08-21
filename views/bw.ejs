@@ -1,0 +1,47 @@
+<!-- Test for automating BW "58/60-poängspronogs" on all teams in the future -->
+<!-- explained here: https://twitter.com/dewnull/status/993712070515482624 -->
+
+<html>
+    <header>
+        <link href="tabell.css" rel="stylesheet">
+        <% var team = "" %>
+    </header>
+    <body>
+        <select id="teamChooser">
+            <% for(var i = 0; i < data.result.item.length; i++){ %>
+            <option value="<%= data.result.item[i].team %>"><%= data.result.item[i].team %></option>
+            <% } %>
+        </select>
+        <button onClick="uppdateraTeam();render();color(tabellArray);">Uppdatera</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Lag</th>
+                    <th>SM</th>
+                    <th>P</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <% for(var i = 0; i < data.result.item.length; i++){ %>
+                <% if(data.result.item[i].team != team){ %>
+                <tr class="tr">
+                    <td><%= data.result.item[i].position %></td>
+                    <td class="teamTD"><%= data.result.item[i].team %></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <% } %>
+                <% } %>
+            </tbody>
+        </table>
+    </body>
+    
+    <script src="scripts.js"></script>
+
+    <script>
+
+    </script>
+    
+    
+</html>

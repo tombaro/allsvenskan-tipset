@@ -1,0 +1,39 @@
+<html>
+    <header>
+        <link href="tabell.css" rel="stylesheet">
+    </header>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Lag</th>
+                    <th>SM</th>
+                    <th>W</th>
+                    <th>O</th>
+                    <th>L</th>
+                    <th>GM</th>
+                    <th>GC</th>
+                    <th>MS</th>
+                    <th>Poäng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < data.result.item.length; i++){ %>
+                <tr>
+                    <td><%= data.result.item[i].position %></td>
+                    <td><%= data.result.item[i].team %></td>
+                    <td><%= data.result.item[i].round %></td>
+                    <td><%= data.result.item[i].win %></td>
+                    <td><%= data.result.item[i].draw %></td>
+                    <td><%= data.result.item[i].loss %></td>
+                    <td><%= data.result.item[i].gm %></td>
+                    <td><%= data.result.item[i].im %></td>
+                    <td><%= data.result.item[i].ms %></td>
+                    <td><%= data.result.item[i].points %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </body>
+</html>
