@@ -7,7 +7,7 @@ ejs = require('ejs'),
 axios = require('axios');
 
 //Domain where API is hosted:
-var domain = 'http://tobeodev.ddns.net:3000';
+var domain = 'http://localhost:3000';
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
