@@ -7,7 +7,10 @@ ejs = require('ejs'),
 axios = require('axios');
 
 //Domain where API is hosted:
-var domain = 'http://localhost:3000';
+var domain = 'https://allsvenskan-api.herokuapp.com/';
+if (app.get('env') === 'development') {
+    domain = 'http://localhost:3000';
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
