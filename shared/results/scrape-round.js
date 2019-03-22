@@ -23,10 +23,11 @@ var scrape = function(req, res, next) {
 
 		// Write to json
 		var to_string = '{ "result": { "round": "' + round + '", "item":' + JSON.stringify(items) + '}}';
+		return to_string;
 
-		fs.writeFile('./shared/results/result-svt-round-' + round + '.json', to_string, function(err) {
-			console.log('Svt has been scraped and saved as round ' + round + ' ;)');
-		});
+		// fs.writeFile('./shared/results/result-svt-round-' + round + '.json', to_string, function(err) {
+		// 	console.log('Svt has been scraped and saved as round ' + round + ' ;)');
+		// });
 	});
 };
 

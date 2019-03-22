@@ -41,26 +41,26 @@
         <% } %>
       </div>
       <div class="col-md-2">
-        <h2>Sluttabell</h2>
+        <h2>Nuvarande tabell</h2>
         <ul class="list-group">
         <% var k = 1; %>
         <% table.result.item.forEach(function(tbl) { %>
           <li class="list-group-item">
-            <%= k %>. <%= tbl.team %>
+            <%= k %>. <%= tbl.team %> <div style="float: right;"><%= tbl.points %></div>
           </li>
           <% k++ %>
         <% }) %>
         </ul>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-md-3">
         <button type="button" id="result" class="btn btn-primary">Uppdatera resultat</button>
       </div>
       <div class="col-md-2">
         <a href="#" id="save-round">Spara som omgång</a>
       </div>
-    </div>
+    </div> -->
     <script type="text/javascript">
       $('button').click(function() {
         $.post('/scrape');

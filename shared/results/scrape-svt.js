@@ -13,7 +13,8 @@ var scrape = function(req, res, next) {
 			var current = obj.rows[i];
 			var tmp = {
 				position: current.substring(0,2).trim(),
-				team: current.substring(3,16).trim()
+				team: current.substring(3,16).trim(),
+				round: current.substring(17,19).trim()
 			};
 			
 			//console.log(team);
@@ -21,10 +22,11 @@ var scrape = function(req, res, next) {
 		};
 		// Write to json
 		var to_string = '{ "result": { "round": "latest", "item":' + JSON.stringify(items) + '}}';
+		return to_string;
 
-		fs.writeFile('./shared/results/result-latest-svt.json', to_string, function(err) {
-			console.log('Svt has been scraped and saved ;)');
-		});
+		// fs.writeFile('./shared/results/result-latest-svt.json', to_string, function(err) {
+		// 	console.log('Svt has been scraped and saved ;)');
+		// });
 	});
 };
 

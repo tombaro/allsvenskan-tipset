@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var scrapesvt = require('./shared/results/scrape-svt.js');
 var scraperound = require('./shared/results/scrape-round.js');
+var scraperesult = require('./shared/results/scrape-results.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -28,18 +29,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/scrape', scrape);
-app.use('/scrape-round', scrape);
+// app.use('/scrape', scrape);
+// app.use('/scrape-round', scrape);
 
-app.post('/scrape', function(req, res, next) {
-  scrapesvt();
-  res.sendStatus(200);
-});
-
-app.post('/scrape-round', function(req, res, next) {
-  scraperound();
-  res.sendStatus(200);
-});
+// app.post('/scrape', function(req, res, next) {
+//   scraperesult();
+//   res.sendStatus(200);
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
