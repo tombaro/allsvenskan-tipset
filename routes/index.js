@@ -8,7 +8,7 @@ var tips = require('../shared/tips/teamscore.js');
 router.get('/', function(req, res, next) {
 	getStandings(function(standings){
 		res.render('index', { 
-			title: 'Tippning Allsvenskan 2018',
+			title: 'Tippning Allsvenskan 2019',
 			score: score.score(standings),
 			tips: tips.teamscore(standings),
 			table: standings
