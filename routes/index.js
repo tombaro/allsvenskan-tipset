@@ -7,11 +7,12 @@ var tips = require('../shared/tips/teamscore.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	getStandings(function(standings){
+		const currentStandings = JSON.parse(standings);
 		res.render('index', { 
 			title: 'Tippning Allsvenskan 2019',
-			score: score.score(standings),
-			tips: tips.teamscore(standings),
-			table: standings
+			score: score.score(currentStandings),
+			tips: tips.teamscore(currentStandings),
+			table: currentStandings
 		});
 	});
 });
