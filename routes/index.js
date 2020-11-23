@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 			title: 'Tippning Allsvenskan 2019',
 			score: score.score(standings),
 			tips: tips.teamscore(standings),
-			table: standings
+			table: JSON.parse(standings)
 		});
 	});
 });
