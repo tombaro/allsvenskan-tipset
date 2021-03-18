@@ -5,13 +5,12 @@ const MAX_POINTS = 16;
 
 function get_points(tips, table) {
 	const count = tips.length;
-	const currentTable = JSON.parse(table).result;
 	var points = 0;
 
 	for (var i = 0; i < count; i++) {
-		for (var j = 0; j < currentTable.item.length; j++) {
-			if( currentTable.item[j].team.toLowerCase() === tips[i].team.toLowerCase()) {
-				points += MAX_POINTS - Math.abs(tips[i].position - currentTable.item[j].position);
+		for (var j = 0; j < table.result.item.length; j++) {
+			if( table.result.item[j].team.toLowerCase() === tips[i].team.toLowerCase()) {
+				points += MAX_POINTS - Math.abs(tips[i].position - table.result.item[j].position);
 			}
 		};
 	};
