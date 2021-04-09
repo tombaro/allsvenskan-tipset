@@ -1,5 +1,5 @@
 // Beräkna poäng per lag, baserat på tips och senaste result
-var tips = require('./tips-shortname.json');
+var tips = require('./tips.json');
 
 const MAX_POINTS = 16;
 
